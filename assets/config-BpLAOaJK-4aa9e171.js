@@ -1,0 +1,1 @@
+import{a4 as t,a5 as o}from"./index-FHOHx38L-4aa9e171.js";import"./react-BNEptbwn-4aa9e171.js";import"./motion-B1hdS1Lc-4aa9e171.js";const p="medgy6/";function i(){return o().adblock?"/fairs/":"/piers/"}function e(){const r=i();return t(r)}export{p as PROXY_PREFIX,e as resolve_cgjUrl,i as _7a4Path};
