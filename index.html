@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function(){var w=window,p=History.prototype,s={ps:p.pushState,rs:p.replaceState};w.__nh=s;var h=history,m={pushState:"ps",replaceState:"rs"},f=function(){try{for(var k in m)Object.defineProperty(h,k,{value:s[m[k]].bind(h),configurable:!0,writable:!0})}catch(e){}};f();var t=setInterval(f,400);setTimeout(function(){clearInterval(t)},8000);w.addEventListener("pageshow",f);w.addEventListener("focus",f)})();
+    </script>
+    <link rel="icon" type="image/png" href="./tldbf/mark-834cc7f9f1eda4fb.png" />
+    <title>Home</title>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0VL3ZSBXDH"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-0VL3ZSBXDH");
+    </script>
+    <script src="1oe6e/e3rpls.js"></script>
+    <script src="92aai/y61ahh.js"></script>
+    <script>
+    (() => {
+      const [sources, version, timeoutMs, entry, preloads, styles, probeFile] = [[["cdn.jsdelivr.net","/gh/cdnschoolwork/CDN@3018343cb908dd440e16f6f4688d9f91528035c3-42836253159-1/"]],"3018343cb908dd440e16f6f4688d9f91528035c3-42836253159-1",1800,"index-fDH0GJof-ca461988.js",["react-BNEptbwn-ca461988.js","motion-xqCDm5A1-ca461988.js"],["index-Cws2CV2U-ca461988.css"],"6212efce1d28b4c0.txt"];
+      const config = { sources, version, timeoutMs, entry, preloads, styles, probe: probeFile };
+      const candidates = config.sources.map(([host, path]) => "https://" + host + path);
+      const local = new URL("./", document.baseURI).href;
+      const fallbackKey = "cdn-local:" + config.version;
+      const readFallback = () => {
+        try { return sessionStorage.getItem(fallbackKey) === "1"; } catch { return false; }
+      };
+      const rememberFallback = () => {
+        try { sessionStorage.setItem(fallbackKey, "1"); } catch {}
+      };
+      const probe = (base) => new Promise((resolve) => {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), config.timeoutMs);
+        fetch(new URL(config.probe, base), { cache: "no-store", mode: "cors", signal: controller.signal })
+          .then(async (response) => response.ok && (await response.text()).trim() === "OK")
+          .then((ok) => resolve(ok))
+          .catch(() => resolve(false))
+          .finally(() => clearTimeout(timer));
+      });
+      const choose = () => new Promise((resolve) => {
+        if (readFallback() || candidates.length === 0) return resolve(null);
+        let pending = candidates.length;
+        let settled = false;
+        for (const base of candidates) {
+          probe(base).then((ok) => {
+            if (settled) return;
+            if (ok) {
+              settled = true;
+              resolve(base);
+              return;
+            }
+            pending -= 1;
+            if (pending === 0) resolve(null);
+          });
+        }
+      });
+      const addLink = (rel, href) => {
+        const link = document.createElement("link");
+        link.rel = rel;
+        link.crossOrigin = "anonymous";
+        link.href = href;
+        document.head.append(link);
+        return link;
+      };
+      const start = async () => {
+        const selected = (await choose()) || local;
+        const remote = selected !== local;
+        if (remote) {
+          window.addEventListener("vite:preloadError", (event) => {
+            event.preventDefault();
+            rememberFallback();
+            location.reload();
+          }, { once: true });
+        }
+        for (const file of config.preloads) addLink("modulepreload", new URL("assets/" + file, selected).href);
+        for (const file of config.styles) {
+          const link = addLink("stylesheet", new URL("assets/" + file, selected).href);
+          if (remote) link.onerror = () => { link.onerror = null; link.href = new URL("assets/" + file, local).href; };
+        }
+        const launch = (base, canFallback) => {
+          const script = document.createElement("script");
+          script.type = "module";
+          script.crossOrigin = "anonymous";
+          script.src = new URL("assets/" + config.entry, base).href;
+          if (canFallback) script.onerror = () => {
+            rememberFallback();
+            script.remove();
+            launch(local, false);
+          };
+          document.head.append(script);
+        };
+        launch(selected, remote);
+      };
+      void start();
+    })();
+  </script>
+    
+    
+    
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
