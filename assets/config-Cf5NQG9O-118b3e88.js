@@ -1,0 +1,1 @@
+import{b7 as t,b8 as o}from"./index-DAJmeMxE-118b3e88.js";import"./react-BNEptbwn-118b3e88.js";import"./motion-xqCDm5A1-118b3e88.js";const a="km1mm1/";function i(){return o().adblock?"/fairs/":"/piers/"}function e(){const r=i();return t(r)}export{a as PROXY_PREFIX,e as resolve_t2fUrl,i as _hgbPath};
